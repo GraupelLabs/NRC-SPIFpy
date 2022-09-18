@@ -1,11 +1,11 @@
-# NRC SPIFpy
+# SPIFpy
 
 NRC's Single Particle Image Format (SPIF) conversion utility.
 Version 1.0 (Release date 9 December, 2021)
 
 ## About
 
-**NRC-SPIFpy** is a set of Command Line Interface(CLI) tools which allow for the conversion of files stored in a
+**SPIFpy** is a set of Command Line Interface(CLI) tools which allow for the conversion of files stored in a
 variety of raw imaging probe formats to the **SPIF** format. The package is written in **Python**,
 and includes the following utilities:
 
@@ -24,11 +24,11 @@ Installation is preferably done in a virtual environment
 
 ### Linux/MacOS
 ```
-$ git clone git@github.com:nrc-cnrc/NRC-SPIFpy.git
+$ git clone git@github.com:GraupelLabs/spifpy.git
 $ cd /path/to/spifpy
 $ pip install .
 ```
-For those who are actively developing NRC-SPIFpy, you can change the last line to ```pip install --editable .```.
+For those who are actively developing spifpy, you can change the last line to ```pip install --editable .```.
 
 ### Windows
 
