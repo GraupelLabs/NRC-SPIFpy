@@ -14,7 +14,7 @@ and includes the following utilities:
 - `spifpy-cc`: Copy the configuration files required for processing with `spifpy` and `spifaddaux`.
 
 ## Installation Requirements
-- Python 3.6+
+- Python 3.7+
 - Linux/MacOS : Any python environment manager (pyenv preferred)
 - Windows : [Anaconda Python Distribution(64-bit)](https://www.anaconda.com/products/individual)
 
@@ -22,21 +22,8 @@ Installation is preferably done in a virtual environment
 
 ## Installation
 
-### Linux/MacOS
 ```
-$ git clone git@github.com:GraupelLabs/spifpy.git
-$ cd /path/to/spifpy
-$ pip install .
-```
-For those who are actively developing spifpy, you can change the last line to ```pip install --editable .```.
-
-### Windows
-
-```
-$ cd /path/to/spifpy
-$ conda env create -f environment.yml
-$ conda activate spifpy
-$ pip install .
+pip install spifpy
 ```
 
 <a name="usage"></a>
