@@ -1,12 +1,12 @@
 # NRC SPIFpy
 
-NRC's Single Particle Image Format (SPIF) conversion utility. 
+NRC's Single Particle Image Format (SPIF) conversion utility.
 Version 1.0 (Release date 9 December, 2021)
 
 ## About
 
-**NRC-SPIFpy** is a set of Command Line Interface(CLI) tools which allow for the conversion of files stored in a 
-variety of raw imaging probe formats to the **SPIF** format. The package is written in **Python**, 
+**NRC-SPIFpy** is a set of Command Line Interface(CLI) tools which allow for the conversion of files stored in a
+variety of raw imaging probe formats to the **SPIF** format. The package is written in **Python**,
 and includes the following utilities:
 
 - `spifpy-extract`: Convert a file in a raw imaging probe format to the **SPIF** format.
@@ -28,7 +28,7 @@ $ git clone git@github.com:nrc-cnrc/NRC-SPIFpy.git
 $ cd /path/to/spifpy
 $ pip install .
 ```
-For those who are actively developing NRC-SPIFpy, you can change the last line to ```pip install --editable .```. 
+For those who are actively developing NRC-SPIFpy, you can change the last line to ```pip install --editable .```.
 
 ### Windows
 
@@ -53,14 +53,14 @@ $ spifpy-cc 2DS
 1. Process the file of interest using `spifpy-extract`
 
 ```
-$ spifpy-extract example_file.2DS 2DS.ini 
+$ spifpy-extract example_file.2DS 2DS.ini
 ```
 
 3. Add auxiliary information to the **SPIF** file using `spifaddaux`(optional), but only for the
 `2DS-V` dataset.
 
 ```
-$ spifpy-addaux example_file_2DS.nc auxiliary_file.nc -i 2DS-V -c aux_config.ini 
+$ spifpy-addaux example_file_2DS.nc auxiliary_file.nc -i 2DS-V -c aux_config.ini
 ```
 
 <a name="supported-probes"></a>
@@ -76,7 +76,7 @@ Currently the following Optical Array Probes (OAP) are supported:
 - HVPS (High Volume Precipitation Spectrometer, SPEC Inc.)
 
 <a name="citation"></a>
-### Citations  
+### Citations
 - <i>Bala, K., Freer, M., Bliankinshtein, N., Nichman, L., Shilin, S. and Wolde, M.: Standardized Imaging Probe Format and Algorithms: Implementation and Applications, 18th International Conference on Clouds and Precipitation (ICCP), Pune, India, 2-6 August, 2021.</i>
 - <i>NRC Single Particle Image Format (SPIF) conversion utility, https://doi.org/10.4224/40002712, 2021</i>
 

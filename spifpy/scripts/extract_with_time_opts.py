@@ -121,7 +121,7 @@ class ArgsChecker:
           if self.args.start is not None : self.check_time_args(self.args.start)
           if self.args.end is not None : self.check_time_args(self.args.end)
           if self.args.nproc is not None : self.check_nproc(self.args.nproc)
-          
+
      def check_filename(self, filename):
 
           try:
@@ -199,7 +199,7 @@ class SPIFStartEndTimeChecker:
 
           self.start_time = None
           self.end_time = None
-     
+
           self.get_start_end_time()
 
      def get_start_end_time(self):
@@ -235,14 +235,14 @@ class SPIFStartEndTimeChecker:
                end_time_sec = dt.timedelta(
                     seconds = end_time_sec[0]*3600 + end_time_sec[1]*60 + end_time_sec[2]
                )
-          
+
           if (start_time is not None) and (end_time is not None):
                try:
                     assert start_time_sec < end_time_sec
                except AssertionError:
                     print(f"ERROR : Start time {start_time} is greater than end time {end_time}")
                     raise
-          
+
           if start_time is not None:
                try:
                     self.check_time_in_file(start_time_sec)
@@ -284,7 +284,7 @@ class ArgsTransformer:
           self.transform_start()
           self.transform_end()
           self.transform_nproc()
-          
+
           return self.transformed_args
 
      def transform_filename(self):

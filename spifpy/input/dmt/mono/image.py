@@ -180,7 +180,7 @@ class ImageAssembler:
         assembled_record_container.image_ns = np.zeros(len(metadata_containers), dtype=np.dtype('u4'))
 
         for i in range(len(metadata_containers)):
-            
+
             assembled_record_container.image_ns[i] = \
               metadata_containers[i].milliseconds*1e6 \
             + metadata_containers[i].nanoseconds
@@ -238,7 +238,7 @@ def get_image_boundaries(data, syncword_sequence_inds):
     image_bound_end = np.zeros_like(syncword_sequence_inds)
     image_bound_end[0:-1] = syncword_sequence_inds[1:]
     image_bound_end[-1] = len(data)
-    
+
     image_bounds = np.vstack([image_bound_start, image_bound_end])
     image_bounds = image_bounds.T
 
@@ -249,23 +249,23 @@ def find_syncword_sequences(data):
     syncword = 0xAA
     conv_kernel = np.array([1,1,1,1,1,1,1,1], dtype = 'B')
     syncword_inds = (data == syncword)
-    
+
     """
     'valid' makes the convolution start inside the array like this:
     |0,1,2|
     |0,1,2,3,4,5....|
-    
+
     instead of this
-    
+
     |0,1,2|
           |0,1,2,3,4,5...|
     """
-    
+
     syncword_inds_conv = np.convolve(syncword_inds, conv_kernel, 'valid')
-    
+
     syncword_sequence_inds = np.argwhere(syncword_inds_conv == 8)
     syncword_sequence_inds = np.ravel(syncword_sequence_inds)
-    
+
     return syncword_sequence_inds
 
 @njit
@@ -275,7 +275,7 @@ def int_to_bin(arr, big_endian = True, flat = True):
     for i in range(len(arr)):
         for j in range(8):
             val_bitstream[i,j] = (arr[i] >> j) & 0b00000001
-            
+
     if big_endian:
         val_bitstream = np.fliplr(val_bitstream)
 

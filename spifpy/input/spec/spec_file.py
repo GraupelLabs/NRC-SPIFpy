@@ -108,7 +108,7 @@ class SPECFile(BinaryFile):
 
         for i in range(len(chunk_intervals) - 1):
             chunk_slice = slice(chunk_intervals[i], chunk_intervals[i + 1])
-            
+
             buffer_ids = [x for x in range(chunk_intervals[i], chunk_intervals[i + 1])]
             buffer_timestamps = self.timestamps[chunk_slice]
             buffers = self.data[chunk_slice]['data']
@@ -194,7 +194,7 @@ class SPECFile(BinaryFile):
         spiffile.rootgrp.sync()
 
     def write_housekeeping_data(self, spiffile, instrument, housekeeping):
-        """ 
+        """
         Called each time number of unsaved processed images exceeds
         10,000. Writes H and V images to SPIF NetCDF file.
         Parameters
@@ -241,7 +241,7 @@ class SPECFile(BinaryFile):
         spiffile.write_variable( hk_group, "power_supply_temp",             housekeeping["power_supply_temp"][:],             dim_size )
         spiffile.write_variable( hk_group, "minus_5V_supply",               housekeeping["minus_5V_supply"][:],               dim_size )
         spiffile.write_variable( hk_group, "plus_5V_supply",                housekeeping["plus_5V_supply"][:],                dim_size )
-        spiffile.write_variable( hk_group, "can_internal_pressure",         housekeeping["can_internal_pressure"][:],         dim_size )      
+        spiffile.write_variable( hk_group, "can_internal_pressure",         housekeeping["can_internal_pressure"][:],         dim_size )
         spiffile.write_variable( hk_group, "hz_elem_21_voltage",            housekeeping["hz_elem_21_voltage"][:],            dim_size )
         spiffile.write_variable( hk_group, "hz_elem_42_voltage",            housekeeping["hz_elem_42_voltage"][:],            dim_size )
         spiffile.write_variable( hk_group, "hz_elem_85_voltage",            housekeeping["hz_elem_85_voltage"][:],            dim_size )
@@ -363,6 +363,3 @@ class SPECFileTASPostProcessor:
         updated_core_tas = interpolated_tas[buffer_id_core]
 
         core_group['tas'][:] = updated_core_tas
-
-
-        

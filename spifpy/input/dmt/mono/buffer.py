@@ -12,18 +12,18 @@ class ImageBufferDecompressor:
         return decompressed_buffer
 @njit
 def decompress_dmt_mono_buffer(data):
-    
+
     decompressed_data = np.array([np.uint8(x) for x in range(0)], dtype = 'B')
-    
+
     i = 0
     while i < len(data):
         rlehb_byte = data[i]
-        
+
         all_zeros = rlehb_all_zeros(rlehb_byte)
         all_ones = rlehb_all_ones(rlehb_byte)
         all_dummy = rlehb_all_dummy(rlehb_byte)
         data_count = rlehb_count(rlehb_byte)
-        
+
         i += 1
 
         if all_zeros:

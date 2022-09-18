@@ -489,4 +489,3 @@ class SPIFFile(object):
         """ Closes NetCDF file.
         """
         self.rootgrp.close()
-

@@ -141,4 +141,3 @@ class DMTBinaryFile(BinaryFile):
                                             d['minute'],
                                             d['second'],
                                             d['ms'] * 1000) for d in self.data]
-

@@ -24,7 +24,7 @@ def copyconf():
         assert pkg_resources.resource_exists('spifpy', f"config/{instrument_config_name}")
     except AssertionError:
         print(f"ERROR : The supplied instrument name {instrument} cannot be found in the config list.")
-    
+
     instrument_config_data = pkg_resources.resource_string('spifpy', f"config/{instrument_config_name}")
     aux_config_data = pkg_resources.resource_string('spifpy', f"config/aux_config.ini")
 

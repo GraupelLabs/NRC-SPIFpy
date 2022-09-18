@@ -103,4 +103,3 @@ class Images(object):
         # self.image = list(itertools.chain.from_iterable(self.image))
         flatten = numpy.concatenate(self.image)
         self.image = flatten.ravel()
-

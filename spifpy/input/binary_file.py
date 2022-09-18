@@ -62,7 +62,7 @@ class BinaryFile(object):
         self.start_date = datetime.datetime(self.data['year'][0],
                                             self.data['month'][0],
                                             self.data['day'][0])
-    
+
     def calc_buffer_datetimes(self):
         """ Calculates datetimes from buffers read in from file and sets
         to datetimes class attribute.
@@ -74,7 +74,7 @@ class BinaryFile(object):
         in ms), so at least when you do call this function for any given
         probe, one can at least use a minimally informative list of datetimes.
         """
-        
+
         self.datetimes = [datetime.datetime(d['year'],
                                             d['month'],
                                             d['day'],

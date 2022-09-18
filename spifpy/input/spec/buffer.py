@@ -77,7 +77,7 @@ class Buffer:
         return int( (buffer_ts - np.floor(buffer_ts))*1e9 )
 
     def alloc_frames(self):
-        
+
         buffer_index = 0
 
         while buffer_index <  2048 - 5:
@@ -93,7 +93,7 @@ class Buffer:
                     buffer_index += 23
                 else:
                     buffer_index += 1
-    
+
     def get_image_metadata_container(self, buffer_index):
         image_metadata_container = self.metadata_processor.process_metadata(buffer_index, self.buffer)
 
@@ -109,12 +109,12 @@ class Buffer:
 
         for i, metadata in enumerate(self.metadata_containers):
             raw_image_containers[i] = self.raw_image_extractor.extract_raw_images(
-                metadata, 
+                metadata,
                 self.buffer
             )
 
             timeword_containers[i] = self.raw_image_extractor.extract_image_timewords(
-                metadata, 
+                metadata,
                 self.buffer
             )
 
@@ -147,8 +147,8 @@ class Buffer:
         self.housekeeping = np.append(
             self.housekeeping,
             housekeeping.process_housekeeping(
-                self.buffer_id, 
-                self.buffer_sec, 
+                self.buffer_id,
+                self.buffer_sec,
                 self.buffer_ns,
                 buffer_index,
                 raw_housekeeping_packet
@@ -172,5 +172,3 @@ class Buffer:
 
         self.assembled_images['h'] = assembled_images_h
         self.assembled_images['v'] = assembled_images_v
-    
-

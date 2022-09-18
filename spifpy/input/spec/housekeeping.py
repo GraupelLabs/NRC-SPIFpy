@@ -71,7 +71,7 @@ def process_housekeeping(buffer_id, buffer_sec, buffer_ns, buffer_index, raw_hou
     if len(raw_housekeeping) < 53:
         raw_housekeeping = np.append( raw_housekeeping, [0] * (53 - len(raw_housekeeping)) )
         housekeeping_container['incomplete_packet'][:] = 1
-    
+
     housekeeping_container["hz_elem_0_voltage"][:] =                 raw_housekeeping[1]  * 0.00244140625
     housekeeping_container["hz_elem_64_voltage"][:] =                raw_housekeeping[2]  * 0.00244140625
     housekeeping_container["hz_elem_127_voltage"][:] =               raw_housekeeping[3]  * 0.00244140625
@@ -119,11 +119,11 @@ def process_housekeeping(buffer_id, buffer_sec, buffer_ns, buffer_index, raw_hou
     housekeeping_container["compression_conf"][:] =                  raw_housekeeping[45]
     housekeeping_container["num_empty_fifo"][:] =                    raw_housekeeping[46]
     housekeeping_container["tas"][:] =                               np.array(
-                                                                        [raw_housekeeping[50],raw_housekeeping[49]], 
+                                                                        [raw_housekeeping[50],raw_housekeeping[49]],
                                                                         dtype=np.uint16
                                                                     ).view("f")[0]
     housekeeping_container["timing_word_1"][:] =                     raw_housekeeping[51]
-    housekeeping_container["timing_word_2"][:] =                     raw_housekeeping[52]  
+    housekeeping_container["timing_word_2"][:] =                     raw_housekeeping[52]
 
     return housekeeping_container
 

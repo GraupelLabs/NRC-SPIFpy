@@ -85,9 +85,9 @@ class ArgsChecker:
 
         if self.args.inst_names != 'all':
             self.check_inst_name(self.args.spif_filename, self.args.inst_names)
-        
+
         self.check_config_filename(self.args.config_filename)
-        
+
         if self.args.output_filename is not None:
             self.check_output_filename(self.args.output_filename)
 
@@ -132,7 +132,7 @@ class ArgsChecker:
             raise
 
     def check_inst_name(self, spif_filename, inst_name):
-        
+
         dset = nc.Dataset(spif_filename, mode = 'r', format = 'NETCDF4')
 
         groups = [x for x in dset.groups.keys()]
@@ -208,7 +208,7 @@ class AuxFileChecker:
     def check_tas(self):
         orig_tas_name = self.config['aux_data'].get('orig_tas', None)
         corr_tas_name = self.config['aux_data'].get('corrected_tas', None)
-        
+
         try:
             assert orig_tas_name in self.aux_var_names
         except AssertionError:
@@ -221,7 +221,7 @@ class AuxFileChecker:
             print(f"The supplied corrected TAS name {corr_tas_name} could not be found in the auxiliary file.")
             raise
 
-    def check_data_disc(self): 
+    def check_data_disc(self):
 
         for k,v in self.config['data_disc'].items():
 
@@ -252,7 +252,7 @@ class ArgsTransformer:
           self.transform_config()
           self.transform_inst_names()
           self.transform_output_filename()
-          
+
           return self.transformed_args
 
      def transform_filename(self):
@@ -320,9 +320,9 @@ def add_aux_to_spif(spif_filename, aux_file, inst_names, config_file, output_fil
     for instrument in inst_names:
 
         print(f'\nAdding aux to {instrument}...')
-        
+
         spif_instgrp = spif_rootgrp[instrument]
-        
+
         if 'aux' not in spif_instgrp.groups:
             spif_instgrp.createGroup('aux')
         spif_auxgrp = spif_instgrp['aux']

@@ -58,33 +58,33 @@ class ImageMetadataContainer:
 
         self.v_start = 0
         self.v_end = 0
-        
+
         self.frame_len = 0
         self.image_in_buffer = 0
 
 class ImageMetadataProcessor:
     """
-    
+
     This is for words 2 in a particle frame
-    
+
     NH (Word 2)
     -----------------------------------------------------------
-    
+
     Bits 0–11 Number of horizontal words–Includes Timing Words if present
-    Bit 12 – 1 = Timing Words not found 
+    Bit 12 – 1 = Timing Words not found
     Bit 13 – Timing Word mismatch
     Bit 14 — FIFO Empty (means the next particle was cut off)
     Bit 15 – The last two words of the horizontal data record are overload timing words
-    
+
     NV (Word 3)
     -------------------------------------------------------------
-    
+
     Bits 0 –11 Number of vertical words–Includes Timing Words if not same as  the  horizontal Timing Word and the TW were found.
-    Bit 12 –1 = Timing Words not found 
-    Bit 13 –Timing Word mismatch 
+    Bit 12 –1 = Timing Words not found
+    Bit 13 –Timing Word mismatch
     Bit 14-FIFO Empty before timing word found
     Bit 15 –The last two words of the vertical data record are overload timing words
-    
+
     """
 
     def __init__(self) -> None:
@@ -191,7 +191,7 @@ class RawImageExtractor:
 
     def extract_image_timewords(self, metadata, buffer):
         self.image_timeword_container = ImageTimewordContainer()
-    
+
         raw_image_h = buffer[metadata.h_start:metadata.h_end]
         raw_image_v = buffer[metadata.v_start:metadata.v_end]
 
@@ -217,11 +217,11 @@ class RawImageDecoder:
         pass
 
     def decode_dual_channel_images(self, raw_image_container):
-        
+
         decoded_image_container = DecodedImageContainer()
         decoded_image_container.decoded_image_h = decode_image(raw_image_container.raw_image_h)
         decoded_image_container.decoded_image_v = decode_image(raw_image_container.raw_image_v)
-        
+
         return decoded_image_container
 
 @jit
@@ -281,14 +281,14 @@ def get_complete_image_slice_inds(start_slice_flags):
     image_slice_id = np.cumsum(start_slice_flags)
 
     image_slice_inds = []
-    
+
     for i in np.unique(image_slice_id):
         image_slice_inds.append(
             np.ravel(
                 np.argwhere(image_slice_id == i)
             )
         )
-    
+
     return image_slice_inds
 
 @jit(nopython = True)
@@ -309,7 +309,7 @@ def decompress_complete_image(decoded_image):
 
             image_slice += [CLEAR_VAL]*decoded_image['num_clear'][slice_idx]
             image_slice += [SHADED_VAL]*decoded_image['num_shaded'][slice_idx]
-        
+
         # Add some clear bits to any incomplete slices
 
         if len(image_slice) < 128:
@@ -373,10 +373,10 @@ class ImageRecordAssembler:
         image_container_v = AssembledImageRecordContainer()
 
         image_container_h, image_container_v = self.set_buffer_info(
-            buffer_id = buffer_id, 
-            buffer_sec = buffer_sec, 
-            buffer_ns = buffer_ns,        
-            num_images = len(metadata_containers),    
+            buffer_id = buffer_id,
+            buffer_sec = buffer_sec,
+            buffer_ns = buffer_ns,
+            num_images = len(metadata_containers),
             image_container_h = image_container_h,
             image_container_v = image_container_v
         )
@@ -397,9 +397,9 @@ class ImageRecordAssembler:
             )
 
             image_container_h, image_container_v = self.set_auxiliaries(
-                metadata_containers, 
+                metadata_containers,
                 timeword_containers,
-                image_container_h, 
+                image_container_h,
                 image_container_v
             )
 
@@ -458,10 +458,10 @@ class ImageRecordAssembler:
         return image_container_h, image_container_v
 
     def set_auxiliaries(
-        self, 
-        metadata, 
+        self,
+        metadata,
         timewords,
-        image_container_h, 
+        image_container_h,
         image_container_v
     ):
 
@@ -563,7 +563,7 @@ def add_auxiliary_core_variables(spiffile, inst_name):
             },
             chunksizes=(TIME_CHUNK,)
         )
-        
+
         spiffile.create_variable(
             coregrp,
             'num_slices',

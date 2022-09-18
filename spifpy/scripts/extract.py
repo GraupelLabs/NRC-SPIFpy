@@ -91,7 +91,7 @@ class ArgsChecker:
           self.check_config(self.args.config)
 
           if self.args.output is not None : self.check_output(self.args.output)
-          
+
      def check_filename(self, filename):
 
           try:
@@ -149,7 +149,7 @@ class ArgsTransformer:
           self.transform_filename()
           self.transform_config()
           self.transform_output()
-          
+
           return self.transformed_args
 
      def transform_filename(self):

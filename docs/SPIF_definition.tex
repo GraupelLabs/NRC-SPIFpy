@@ -41,7 +41,7 @@
     {\settowidth{\Mylen}{#1}%
      \ifthenelse{\lengthtest{\Mylen>\labelwidth}}%
                 % if label > labelwidth
-                {\parbox[b]{\labelwidth}% 
+                {\parbox[b]{\labelwidth}%
                 {\makebox[0pt][l]{#1}
                  \mbox{}\\}}%
                 % else if label < labelwidth
@@ -94,7 +94,7 @@ A variety of file formats are used by particle imaging instrument manufacturers.
 
 
 \section{Description}
-The SPIF file format uses the NetCDF4 format. NetCDF4 is a structured binary file format capable of containing large datasets and has automatic compression utilities. NetCDF4 is widely supported on a variety of platforms and environments. 
+The SPIF file format uses the NetCDF4 format. NetCDF4 is a structured binary file format capable of containing large datasets and has automatic compression utilities. NetCDF4 is widely supported on a variety of platforms and environments.
 \par
 Datasets will be contained in groups within a SPIF file. Only data from a single instrument (or instrument channel) may be stored in a given group although SPIF files can contain data from multiple instruments through the use of multiple groups.
 Metadata will be provided for each instrument to provide information on data sources etc.
@@ -133,9 +133,9 @@ The root of the SPIF file has all of the global data and attributes relating to 
 
 \subsection{Instrument Group}
 
-The root of the instrument group contains information pertaining to the individual instrument. It may also include information about the probe software module that was used to create it, this may be different to the version of the overall processing code. 
-\par 
-Some probes will have multiple channels, for example the 2DS has two orthogonal arms, with each detecting particles independently, essentially behaving as independent instruments. Since the primary coordinate applies only to particle sequences from a single instrument, for a probe that is made up of multiple instruments (e.g., 2DS, 3V-CPI, etc) where the particle detection will not be coincident, data is split into different instrument groups. These groups should be named using the core instrument name, followed by the channel name, separated by a dash. So for a 2DS instrument, the Instrument Groups would be named '2DS-H' and '2DS-V'. 
+The root of the instrument group contains information pertaining to the individual instrument. It may also include information about the probe software module that was used to create it, this may be different to the version of the overall processing code.
+\par
+Some probes will have multiple channels, for example the 2DS has two orthogonal arms, with each detecting particles independently, essentially behaving as independent instruments. Since the primary coordinate applies only to particle sequences from a single instrument, for a probe that is made up of multiple instruments (e.g., 2DS, 3V-CPI, etc) where the particle detection will not be coincident, data is split into different instrument groups. These groups should be named using the core instrument name, followed by the channel name, separated by a dash. So for a 2DS instrument, the Instrument Groups would be named '2DS-H' and '2DS-V'.
 \par
 Metadata that should be defined in the Instrument group include:
 \\
@@ -150,8 +150,8 @@ Metadata that should be defined in the Instrument group include:
 \varlabel[Instrument firmware version]{char}{instrument\_firmware}{}\\
 \varlabel[Instrument software version]{char}{instrument\_software}{}\\
 \varlabel[Name or description of platform instrument is mounted on]{char}{platform}{}\\
-\varlabel[Raw data filename(s) used to generate the current instrument dataset]{array of char}{raw\_filenames}{}\\ 
-\varlabel[Name and version of code used to generate SPIF output]{char}{spif\_processor}{}\\ 
+\varlabel[Raw data filename(s) used to generate the current instrument dataset]{array of char}{raw\_filenames}{}\\
+\varlabel[Name and version of code used to generate SPIF output]{char}{spif\_processor}{}\\
 \varlabel[Any further notes about instrument, platform, location, orientation, etc]{char}{comment}{}\\
 \par
 Although envisaged to be used exclusively with optical array probes, there is no reason that this format could not be used for any instrument type. Therefore there may not be suitable universal descriptive attributes for all instrument types. It may thus be desirable that these attributes are placed in a sub-group although this may add a layer of complexity for little gain. Below are variables which may be used for an optical array probe.
@@ -349,7 +349,7 @@ Following extraction of image data into SPIF format, images can be analyzed to e
 \item All-in (boolean)
 \end{itemize}
 
-Interpretation of particle diameter presents a challenge, as there are currently several definitions of particle diameter in use by the community, and a standard definition likely isn't reasonable, since different diameters are useful depending on the measurement scenario. Thus, to make SPIF useful to the broader community, it should include a wide set of diameters in use by the community. 
+Interpretation of particle diameter presents a challenge, as there are currently several definitions of particle diameter in use by the community, and a standard definition likely isn't reasonable, since different diameters are useful depending on the measurement scenario. Thus, to make SPIF useful to the broader community, it should include a wide set of diameters in use by the community.
 
 An additional consideration for the inclusion of various particle diameters is how these diameters are named. Throughout the literature, varying names have been given to essentially identical diameters. In the diameter definitions here, an attempt will be made to standardize the names, while referencing other names used for a given diameter definition.
 
@@ -368,7 +368,7 @@ Note that the Level 0 particles will be sized using number of pixels -- conversi
 \item[$N_{hole}$] Max hole diameter as defined in Korolev 2007.
 \end{itemize}
 
-Each of the parameters discussed above applies to individual particles. For most OAPs, there can be multiple particles in a single image. Given this n-to-one relationship, the Level 0 particle data will require use of a new dimension corresponding to the number of particles detected, which is likely to be different than the number of images captured. The $particles$ dimension thus covers all parameters described in this section. With the additional dimension, there is a need for supplemental parameters which describe the relationship of detected particles to their original image, both in terms of a reference to the additional image, as well as a more exact temporal location, based on the particle's location in the image frame. 
+Each of the parameters discussed above applies to individual particles. For most OAPs, there can be multiple particles in a single image. Given this n-to-one relationship, the Level 0 particle data will require use of a new dimension corresponding to the number of particles detected, which is likely to be different than the number of images captured. The $particles$ dimension thus covers all parameters described in this section. With the additional dimension, there is a need for supplemental parameters which describe the relationship of detected particles to their original image, both in terms of a reference to the additional image, as well as a more exact temporal location, based on the particle's location in the image frame.
 
 \begin{itemize}
 \item[image\_index] Reference to source image index.
@@ -427,7 +427,7 @@ With these factors in mind, the Level 0 data should be implemented as described 
 \vbox{
 \begin{varlist}{float}{N\_eq}{($particles$)}
 \item[long\_name] ``Diameter of circle with area equivalent to particle area'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] pixels;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -445,7 +445,7 @@ With these factors in mind, the Level 0 data should be implemented as described 
 \vbox{
 \begin{varlist}{float}{N\_h}{($particles$)}
 \item[long\_name] ``Hypotenuse of triangle formed by N\_p and N\_t'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] pixels;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -454,7 +454,7 @@ With these factors in mind, the Level 0 data should be implemented as described 
 \vbox{
 \begin{varlist}{float}{N\_m}{($particles$)}
 \item[long\_name] ``Mean of N\_p and N\_t'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] pixels;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -481,7 +481,7 @@ With these factors in mind, the Level 0 data should be implemented as described 
 \vbox{
 \begin{varlist}{float}{N\_reconst}{($particles$)}
 \item[long\_name] ``Reconstructed circle diameter for center-in particles'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] pixels;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -490,7 +490,7 @@ With these factors in mind, the Level 0 data should be implemented as described 
 \vbox{
 \begin{varlist}{float}{N\_hole}{($particles$)}
 \item[long\_name] ``Max hole diameter'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] pixels;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -631,7 +631,7 @@ Whereas Level 0 data presents particle information as simply properties of an im
 
 \begin{enumerate}
 \item Particle properties scaled to physical dimensions ($\mu m$, etc.) using the resolution of the instrument
-\item Parameters classifying particles into habits or other categories 
+\item Parameters classifying particles into habits or other categories
 \end{enumerate}
 
 When generating scaled particle properties, care must be taken to correct for improper scaling in the image time direction due to inconsistencies between the probe sampling rate and the speed of the aircraft. These inconsistencies can happen for various reasons -- the most common reasons include exceeding TAS limits of the probe; having incorrect or constant airspeed inputs supplied to the probe; or problems with local pitot measurements due to icing, blockages, or other reasons. In these cases, the image scaling along the time direction can be corrected by scaling it by the correct TAS divided by the original TAS.
@@ -685,7 +685,7 @@ Scaled particle properties should include the following parameters:
 \vbox{
 \begin{varlist}{float}{D\_h}{($particles$)}
 \item[long\_name] ``Hypotenuse of triangle formed by D\_p and D\_t'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] microns;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -694,7 +694,7 @@ Scaled particle properties should include the following parameters:
 \vbox{
 \begin{varlist}{float}{D\_m}{($particles$)}
 \item[long\_name] ``Mean of D\_p and D\_t'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] microns;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -721,7 +721,7 @@ Scaled particle properties should include the following parameters:
 \vbox{
 \begin{varlist}{float}{D\_reconst}{($particles$)}
 \item[long\_name] ``Reconstructed circle diameter for center-in particles'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[units] microns;
 \item[comment] Any relevant comments;
 \end{varlist}
@@ -730,7 +730,7 @@ Scaled particle properties should include the following parameters:
 \vbox{
 \begin{varlist}{float}{D\_korolev}{($particles$)}
 \item[long\_name] ``Korolev-corrected diameter'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[refererence] ``Korolev, 2007''
 \item[units] microns;
 \item[comment] Any relevant comments;
@@ -740,7 +740,7 @@ Scaled particle properties should include the following parameters:
 \vbox{
 \begin{varlist}{float}{N\_korolev}{($particles$)}
 \item[long\_name] ``Korolev-corrected diameter'';
-\item[equivalent\_names] 
+\item[equivalent\_names]
 \item[refererence] ``Korolev, 2007''
 \item[units] pixels;
 \item[comment] Any relevant comments;
@@ -797,7 +797,7 @@ The second component of Level 1 data contains parameters used to classify partic
 \end{varlist}
 }
 
-Where the $key$ attribute uses keyword: value pairs to specify the classification types and their corresponding character code for the given parameter. 
+Where the $key$ attribute uses keyword: value pairs to specify the classification types and their corresponding character code for the given parameter.
 
 In cases where classifications have auxiliary parameters necessary for classification (e.g., the $R$ parameter in the Korolev classification scheme), these should also be included in this section. These parameters should be named in such a way where they can be easily identified, and should include a long description and units parameter, as appropriate.
 
@@ -824,7 +824,7 @@ Level 2 Processed Data contains binned histograms and calculated bulk microphysi
 %\par
 %For monoscale image probes level zero processed data may include:
 %\begin{itemize}
-%\item Single particle properties 
+%\item Single particle properties
 %\item Area
 %\item Filled Area
 %\item Perimeter
