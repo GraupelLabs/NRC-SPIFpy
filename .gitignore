@@ -5,6 +5,7 @@
 *.sea
 *.gz
 *.DS_Store
+__version__.py
 
 
 # == Python gitignore ==
