@@ -1,7 +1,10 @@
-# SPIFpy
+# spifpy: Single Particle Image Format conversion utility
 
-NRC's Single Particle Image Format (SPIF) conversion utility.
-Version 1.0 (Release date 9 December, 2021)
+[![PyPI Latest Release](https://img.shields.io/pypi/v/spifpy.svg)](https://pypi.org/project/spifpy/)
+[![Build status](https://github.com/GraupelLabs/spifpy/actions/workflows/ci.yml/badge.svg)](https://github.com/GraupelLabs/spifpy/actions/workflows/ci.yml?query=branch%3Amain)
+[![License](https://img.shields.io/github/license/GraupelLabs/spifpy)](https://github.com/GraupelLabs/spifpy/blob/main/LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.4224/40002712.svg)](https://doi.org/10.4224/40002712)
+
 
 ## About
 
@@ -12,13 +15,6 @@ and includes the following utilities:
 - `spifpy-extract`: Convert a file in a raw imaging probe format to the **SPIF** format.
 - `spifpy-addaux`: Add auxiliary data to a file in the **SPIF** format.
 - `spifpy-cc`: Copy the configuration files required for processing with `spifpy` and `spifaddaux`.
-
-## Installation Requirements
-- Python 3.7+
-- Linux/MacOS : Any python environment manager (pyenv preferred)
-- Windows : [Anaconda Python Distribution(64-bit)](https://www.anaconda.com/products/individual)
-
-Installation is preferably done in a virtual environment
 
 ## Installation
 
