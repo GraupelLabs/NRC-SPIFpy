@@ -8,11 +8,11 @@ import numpy as np
 
 from tqdm import tqdm
 
-from nrc_spifpy.input.binary_file import BinaryFile
-from nrc_spifpy.input.dmt.mono.buffer import decompress_dmt_mono_buffer
-from nrc_spifpy.input.dmt.mono.image import find_syncword_sequences, get_image_boundaries
-from nrc_spifpy.input.dmt.mono.image import ImageMetadataProcessor, ImageDataProcessor, ImageAssembler, AssembledImageContainer
-from nrc_spifpy.input.dmt.mono.image import add_auxiliary_core_variables
+from spifpy.input.binary_file import BinaryFile
+from spifpy.input.dmt.mono.buffer import decompress_dmt_mono_buffer
+from spifpy.input.dmt.mono.image import find_syncword_sequences, get_image_boundaries
+from spifpy.input.dmt.mono.image import ImageMetadataProcessor, ImageDataProcessor, ImageAssembler, AssembledImageContainer
+from spifpy.input.dmt.mono.image import add_auxiliary_core_variables
 
 file_buffer_template = np.dtype([
     ('year', 'u2'),

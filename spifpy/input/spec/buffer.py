@@ -1,13 +1,12 @@
 import numpy as np
 
-from nrc_spifpy.input.spec.image import ImageMetadataProcessor
-from nrc_spifpy.input.spec.image import RawImageExtractor
-from nrc_spifpy.input.spec.image import RawImageDecoder
-from nrc_spifpy.input.spec.image import DecodedImageDecompressor
-from nrc_spifpy.input.spec.image import ImageRecordAssembler
-from nrc_spifpy.input.spec.image import AssembledImageRecordContainer
+from spifpy.input.spec.image import ImageMetadataProcessor
+from spifpy.input.spec.image import RawImageExtractor
+from spifpy.input.spec.image import RawImageDecoder
+from spifpy.input.spec.image import DecodedImageDecompressor
+from spifpy.input.spec.image import ImageRecordAssembler
 
-from nrc_spifpy.input.spec import housekeeping
+from spifpy.input.spec import housekeeping
 
 DATA_FLAG = (ord('2') << 8) + ord('S')
 HK_FLAG = (ord('H') << 8) + ord('K')

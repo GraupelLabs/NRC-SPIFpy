@@ -3,12 +3,12 @@ import datetime
 import numpy as np
 from scipy.interpolate import interp1d
 
-from nrc_spifpy.input.binary_file import BinaryFile
-from nrc_spifpy.input.spec.buffer import Buffer
-from nrc_spifpy.input.spec.image import AssembledImageRecordContainer
-from nrc_spifpy.input.spec.housekeeping import add_housekeeping_variables, housekeeping_template, create_housekeeping_group
+from spifpy.input.binary_file import BinaryFile
+from spifpy.input.spec.buffer import Buffer
+from spifpy.input.spec.image import AssembledImageRecordContainer
+from spifpy.input.spec.housekeeping import add_housekeeping_variables, housekeeping_template, create_housekeeping_group
 
-from nrc_spifpy.input.spec.image import add_auxiliary_core_variables
+from spifpy.input.spec.image import add_auxiliary_core_variables
 
 from tqdm import tqdm
 

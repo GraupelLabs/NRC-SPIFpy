@@ -1,10 +1,7 @@
 import numpy as np
-import numba as nb
-from numba import types, typed, typeof
 from numba import jit
-from numba.experimental import jitclass
 
-from nrc_spifpy.spif import TIME_CHUNK
+from spifpy.spif import TIME_CHUNK
 
 # The size of the metadata in a particle record
 # Word 1 = Flag 2S

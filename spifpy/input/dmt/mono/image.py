@@ -1,12 +1,9 @@
 import numpy as np
 
 from numba import njit
-
 from math import ceil
 
-from tqdm import tqdm
-
-from nrc_spifpy.spif import TIME_CHUNK
+from spifpy.spif import TIME_CHUNK
 
 class ImageMetadataContainer:
 

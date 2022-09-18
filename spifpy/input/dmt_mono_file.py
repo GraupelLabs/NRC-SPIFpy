@@ -6,9 +6,9 @@ import math
 
 import numpy
 
-from nrc_spifpy.input.dmt_binary_file import DMTBinaryFile
-from nrc_spifpy.images import Images
-from nrc_spifpy.utils import bin_to_int, convert_uint8_to_bitlist
+from spifpy.input.dmt_binary_file import DMTBinaryFile
+from spifpy.images import Images
+from spifpy.utils import bin_to_int, convert_uint8_to_bitlist
 
 
 class DMTMonoFile(DMTBinaryFile):

@@ -1,3 +1,9 @@
 """ spifpy library public imports """
 
-from nrc_spifpy.__version__ import __version__
+from pkg_resources import DistributionNotFound, get_distribution
+
+try:
+    __version__ = get_distribution("spifpy").version
+except DistributionNotFound:
+    # package is not installed
+    pass
