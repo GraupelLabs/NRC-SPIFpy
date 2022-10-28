@@ -30,7 +30,7 @@ FilePath = Union[str, PathLike]
 class SpifDataset:
     """Generic SPIF dataset class."""
 
-    SUPPORTED_PROBES = ["2DC", "2DS-H", "2DS-V" "CIP", "CPI", "HSI", "HVPS", "PIP"]
+    SUPPORTED_PROBES = ["2DC", "2DS-H", "2DS-V", "CIP", "CPI", "HSI", "HVPS", "PIP"]
     DEFAULT_TIME_BASIS = "seconds since start_date"
     DEFAULT_TIME_FORMAT = "%F %T %z"
 
