@@ -211,7 +211,7 @@ class SpifDataset:
 
         return result
 
-    def _read_probe(self, probe: Optional[str] = None):
+    def _read_probe(self, probe: Optional[str] = None) -> SpifProbe:
         available_probes = self.get_available_probes()
 
         if not probe:
@@ -222,17 +222,16 @@ class SpifDataset:
                     "To change that, specify probe parameter when calling SpifDataset constructor."
                 )
 
-            elif len(available_probes) >= 1:
+            if len(available_probes) >= 1:
                 probe_name = available_probes[0]
                 return get_probe(probe_name)
-            else:
-                raise SpifDatasetException(
-                    "No probe groups found in the dataset file. "
-                    "The file is likely corrupted."
-                )
 
-        else:
-            return get_probe(probe)
+            raise SpifDatasetException(
+                "No probe groups found in the dataset file. "
+                "The file is likely corrupted."
+            )
+
+        return get_probe(probe)
 
     @staticmethod
     def convert_netcdf_time(time_data, time_basis, basis_format, start_date):
