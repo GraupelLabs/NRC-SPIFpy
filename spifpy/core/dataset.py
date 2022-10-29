@@ -1,4 +1,5 @@
 import datetime
+import logging
 import sys
 from os import PathLike
 from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Set, Union
@@ -7,7 +8,9 @@ import numpy as np
 import numpy.typing as npt
 import xarray as xr
 
-from spifpy.probes import get_probe, SpifProbe, ProbeType
+from spifpy.probes import get_probe, SpifProbe
+
+logger = logging.getLogger(__name__)
 
 
 class SpifDatasetException(Exception):
@@ -213,15 +216,20 @@ class SpifDataset:
 
         if not probe:
             if len(available_probes) > 1:
-                raise SpifDatasetException(
+                logger.warn(
                     "More than 1 probe found in the dataset file. "
-                    "Specify which probe to read when loading SpifDataset constructor."
+                    f"By default the first probe {available_probes[0]} will be used."
+                    "To change that, specify probe parameter when calling SpifDataset constructor."
                 )
-            elif len(available_probes) == 1:
-                probe_name = available_probes.pop()
+
+            elif len(available_probes) >= 1:
+                probe_name = available_probes[0]
                 return get_probe(probe_name)
             else:
-                raise SpifDatasetException("No probe groups found in the dataset file.")
+                raise SpifDatasetException(
+                    "No probe groups found in the dataset file. "
+                    "The file is likely corrupted."
+                )
 
         else:
             return get_probe(probe)
@@ -266,16 +274,17 @@ class SpifDataset:
 
         return time_dt
 
-    def get_available_probes(self) -> Set[str]:
+    def get_available_probes(self) -> List[str]:
         """
         Based on the file, return the list of its probes.
 
         Returns
         -------
-        Set[str]
-            List of probes, data of which this file contains
+        List[str]
+            List of probes, ordered alphabetically,
+            data of which this file contains
         """
-        file_probes = set()
+        file_probes = []
 
         for probe in SpifDataset.SUPPORTED_PROBES:
             try:
@@ -286,14 +295,14 @@ class SpifDataset:
                     decode_times=False,
                 )
                 dataset.close()
-                file_probes.add(probe)
+                file_probes.append(probe)
             except Exception:  # nosec
                 # we shouldn't ideally continue after exception,
                 # potentially look for a better solution to check available
                 # probes in the file
                 continue
 
-        return file_probes
+        return sorted(file_probes)
 
     def get_end_index(self):
         return self.end_index
