@@ -1,8 +1,8 @@
-import datetime
 import logging
 import sys
+from datetime import datetime, timedelta
 from os import PathLike
-from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Set, Union
+from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Union
 
 import numpy as np
 import numpy.typing as npt
@@ -22,7 +22,7 @@ class ParticleData(NamedTuple):
 
     image_id: int
     image: npt.NDArray
-    timestamp: datetime.datetime
+    timestamp: datetime
     metadata: Optional[Dict[str, Any]]
 
 
@@ -218,7 +218,7 @@ class SpifDataset:
             if len(available_probes) > 1:
                 logger.warn(
                     "More than 1 probe found in the dataset file. "
-                    f"By default the first probe {available_probes[0]} will be used."
+                    f"By default the first probe {available_probes[0]} will be used. "
                     "To change that, specify probe parameter when calling SpifDataset constructor."
                 )
 
@@ -264,12 +264,12 @@ class SpifDataset:
 
         time_basis = time_basis.replace("start_date", start_date)
         try:
-            tb_dt = datetime.datetime.strptime(time_basis, basis_format)
+            tb_dt = datetime.strptime(time_basis, basis_format)
         except ValueError:
-            tb_dt = datetime.datetime.strptime(
+            tb_dt = datetime.strptime(
                 time_basis, basis_format.replace("%z", "").strip()
             )
-        time_dt = [tb_dt + datetime.timedelta(seconds=t) for t in time_data]
+        time_dt = [tb_dt + timedelta(seconds=t) for t in time_data]
 
         return time_dt
 
@@ -303,23 +303,51 @@ class SpifDataset:
 
         return sorted(file_probes)
 
-    def get_end_index(self):
-        return self.end_index
-
-    def get_end_time(self):
+    def get_end_time(self) -> datetime:
+        """Get timestamp of the last image in the dataset."""
         return self.datetimes[-1]
 
-    def get_probe(self):
+    def get_file_path(self) -> FilePath:
+        """Get dataset file path."""
+        return self.fpath
+
+    def get_image_id_by_timestamp(self, timestamp: datetime) -> int:
+        """
+        Get image index by timestamp.
+
+        Considering that all timestamps are ordered in the dataset,
+        look up an image that has a timestamp closest to the passed value.
+
+        If the passed timestamp is earlier than the timestamp of the first image,
+        0 will be returned. If it is later than the timestamp of the last image,
+        the index of the last image will be returned.
+        """
+        if len(self.datetimes) == 0:
+            return 0
+
+        if timestamp > self.datetimes[-1]:
+            return len(self.datetimes) - 1
+
+        if timestamp < self.datetimes[0]:
+            return 0
+
+        for i, array_timestamp in enumerate(self.datetimes):
+            if array_timestamp > timestamp:
+                return i
+
+        return 0
+
+    def get_images_number(self) -> int:
+        """Get number of images in the dataset."""
+        return len(self.datetimes)
+
+    def get_probe(self) -> SpifProbe:
+        """Get an instance of the currently open probe."""
         return self.probe
 
-    def get_start_index(self):
-        return self.start_index
-
-    def get_start_time(self):
+    def get_start_time(self) -> datetime:
+        """Get timestamp of the first image in the dataset."""
         return self.datetimes[0]
-
-    def get_timestamp(self, index: int):
-        return self.datetimes[index]
 
     def read(self, start: int = 0, end: int = sys.maxsize) -> Iterator[ParticleData]:
         start_index = max(self.start_index, start)
