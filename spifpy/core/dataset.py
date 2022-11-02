@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 from datetime import datetime, timedelta
 from os import PathLike
@@ -39,6 +40,12 @@ class SpifDataset:
 
     def __init__(self, fpath: FilePath, probe: Optional[str] = None):
         self.fpath = fpath
+
+        if not os.path.exists(self.fpath) or not os.path.isfile(self.fpath):
+            raise FileNotFoundError(
+                f"Spif Dataset file not found under path {self.fpath}"
+            )
+
         self.probe: SpifProbe = self._read_probe(probe)
         self._init_dataset()
 
