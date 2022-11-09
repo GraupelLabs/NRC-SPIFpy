@@ -1,6 +1,5 @@
 import configparser
 from datetime import datetime
-from distutils.command.config import config
 import pathlib as pl
 
 from copy import deepcopy
@@ -12,7 +11,7 @@ import numpy as np
 import netCDF4 as nc
 import xarray as xr
 
-from nrc_spifpy.spif import SPIFFile
+from spifpy.spif import SPIFFile
 
 
 @click.command()
