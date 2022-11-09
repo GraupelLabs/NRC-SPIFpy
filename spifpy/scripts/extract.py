@@ -8,6 +8,7 @@ import pathlib as pl
 from spifpy.input import DMTMonoFile
 from spifpy.input import DMTGreyFile
 from spifpy.input import SPECFile
+from spifpy.input import DMTGreyMonoFile
 from spifpy.input import TwoDFile
 from spifpy.spif import SPIFCore
 
@@ -17,7 +18,8 @@ inst_dict = {'2DC': TwoDFile,
              'CIPGS': DMTGreyFile,
              'PIP': DMTMonoFile,
              '2DS': SPECFile,
-             'HVPS': SPECFile}
+             'HVPS': SPECFile,
+             'HVPS4': SPECFile}
 
 def extract():
 
@@ -60,13 +62,13 @@ def get_parser():
     return parser
 
 def call_spifcore(transformed_args):
-     inst_name = get_inst_name(transformed_args)
+     inst_name, inst_class = get_inst_name(transformed_args)
      filename = transformed_args['filename']
      outfile = transformed_args['output']
      config = transformed_args['config']
 
      spif_core = SPIFCore(
-          inst_dict[inst_name],
+          inst_class,
           filename,
           outfile,
           config
@@ -79,8 +81,11 @@ def get_inst_name(transformed_args):
 
      config.read(transformed_args['config'])
      inst_name = config['instrument'].get('instrument_name', None)
+     inst_class = inst_dict[inst_name]
+     if config['instrument'].getboolean('mono_as_grey', False):
+          inst_class = DMTGreyMonoFile
 
-     return inst_name
+     return inst_name, inst_class
 
 class ArgsChecker:
      def __init__(self, args):
