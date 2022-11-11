@@ -71,27 +71,6 @@ class SpifProbe(ABC):
 
     @classmethod
     @abstractmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        By default the smallest particle will have a zero size, therefore
-        all particles will be considered as "not small".
-
-        Normally, threshold value would be similar to the probe resolution,
-        and sometimes it is 2x or 3x of the resolution. For example, if a
-        probe resolution is 5 micron, particles that are about 10 microns
-        or even 15 microns may still be considered small.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 0.0
-
-    @classmethod
-    @abstractmethod
     def get_type(cls) -> ProbeType:
         """
         Get a probe type.
@@ -132,18 +111,6 @@ class CpiProbe(SpifProbe):
         return 2.3
 
     @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 6.25
-
-    @classmethod
     def get_type(cls) -> ProbeType:
         """
         Get a probe type.
@@ -170,18 +137,6 @@ class TwoDsProbe(SpifProbe):
             Probe resolution, microns per pixel
         """
         return 10.0
-
-    @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 11.83
 
     @classmethod
     def get_type(cls) -> ProbeType:
@@ -256,18 +211,6 @@ class HvpsProbe(SpifProbe):
         return 150.0
 
     @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 200.0
-
-    @classmethod
     def get_type(cls) -> ProbeType:
         """
         Get a probe type.
@@ -296,18 +239,6 @@ class Hvps4Res50(SpifProbe):
         return 50.0
 
     @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 70.0
-
-    @classmethod
     def get_type(cls) -> ProbeType:
         """
         Get a probe type.
@@ -334,18 +265,6 @@ class Hvps4Res150(SpifProbe):
             Probe resolution, microns per pixel
         """
         return 150.0
-
-    @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 200.0
 
     @classmethod
     def get_type(cls) -> ProbeType:
@@ -452,18 +371,6 @@ class CipProbe(SpifProbe):
         return 25.0
 
     @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 35.0
-
-    @classmethod
     def get_type(cls) -> ProbeType:
         """
         Get a probe type.
@@ -502,18 +409,6 @@ class PipProbe(SpifProbe):
             Probe resolution, microns per pixel
         """
         return 100.0
-
-    @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 150.0
 
     @classmethod
     def get_type(cls) -> ProbeType:
@@ -556,18 +451,6 @@ class TwoDcProbe(SpifProbe):
         return 25.0
 
     @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 35.0
-
-    @classmethod
     def get_type(cls) -> ProbeType:
         """
         Get a probe type.
@@ -606,18 +489,6 @@ class HsiProbe(SpifProbe):
             Probe resolution, microns per pixel
         """
         return 2.5
-
-    @classmethod
-    def get_small_threshold(cls) -> float:
-        """
-        Get a size thresold for a "small" particle for the probe.
-
-        Returns
-        -------
-        float
-            Particle size threshold, microns
-        """
-        return 6.25
 
     @classmethod
     def get_type(cls) -> ProbeType:
