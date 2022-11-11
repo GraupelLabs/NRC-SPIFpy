@@ -5,6 +5,10 @@ from .probetypes import (
     CpiProbe,
     HsiProbe,
     HvpsProbe,
+    Hvps4V50Probe,
+    Hvps4V150Probe,
+    Hvps4H50Probe,
+    Hvps4H150Probe,
     PipProbe,
     SpifProbe,
     TwoDcProbe,
@@ -46,6 +50,14 @@ def get_probe(probe_type: str) -> SpifProbe:
         return TwoDcProbe()
     elif probe == "hvps":
         return HvpsProbe()
+    elif probe == "hvps4-v50":
+        return Hvps4V50Probe()
+    elif probe == "hvps4-h50":
+        return Hvps4H50Probe()
+    elif probe == "hvps4-v150":
+        return Hvps4V150Probe()
+    elif probe == "hvps4-h150":
+        return Hvps4H150Probe()
     elif probe == "cip":
         return CipProbe()
     elif probe == "pip":
