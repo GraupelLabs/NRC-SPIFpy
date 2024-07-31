@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/github/license/GraupelLabs/spifpy)](https://github.com/GraupelLabs/spifpy/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.4224/40002712.svg)](https://doi.org/10.4224/40002712)
 
+> [!WARNING]  
+> This repository is archived and deprecated in favor of [the official NRC repository](https://github.com/nrc-cnrc/NRC-SPIFpy).
 
 ## About
 
